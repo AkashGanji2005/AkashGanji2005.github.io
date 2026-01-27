@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pizza Order</title>
+  <title>Pizza Ordering Form</title>
 </head>
 <body>
 
 <header>
-  <h1>Pizza Order Form</h1>
+  <h1>Pizza Ordering Form</h1>
 </header>
 
 <main>
 
   <form>
 
-    <fieldset>
-      <legend>Customer Information</legend>
+    <section>
+      <h2>Contact Information</h2>
 
       <p>
         <label for="name">Name:</label>
@@ -31,106 +31,105 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
       </p>
+    </section>
 
-    </fieldset>
+    <section>
+      <h2>Select Pizza Size</h2>
 
-    <fieldset>
-      <legend>Pizza Size</legend>
-
-      <label for="size">Select Size:</label>
+      <label for="size">Pizza Size:</label>
       <select id="size" name="size" required>
-        <option value="">Select Size</option>
+        <option value="">--Select Size--</option>
         <option value="medium">Medium</option>
         <option value="large">Large</option>
         <option value="xlarge">XLarge</option>
       </select>
+    </section>
 
-    </fieldset>
+    <section>
+      <h2>Select Sauce</h2>
 
-    <fieldset>
-      <legend>Sauce Type</legend>
+      <input type="radio" id="marinara" name="sauce" value="marinara" required>
+      <label for="marinara">Marinara</label><br>
 
-      <input type="radio" id="tomato" name="sauce" value="tomato" required>
-      <label for="tomato">Tomato</label><br>
+      <input type="radio" id="ranch" name="sauce" value="ranch">
+      <label for="ranch">Ranch</label><br>
 
-      <input type="radio" id="alfredo" name="sauce" value="alfredo">
-      <label for="alfredo">Alfredo</label><br>
+      <input type="radio" id="nosauce" name="sauce" value="none">
+      <label for="nosauce">No Sauce</label>
+    </section>
 
-      <input type="radio" id="bbq" name="sauce" value="bbq">
-      <label for="bbq">BBQ</label>
+    <section>
+      <h2>Select Toppings</h2>
 
-    </fieldset>
+      <input type="checkbox" id="pepperoni" name="topping" value="pepperoni">
+      <label for="pepperoni">Pepperoni</label>
 
-    <fieldset>
-      <legend>Toppings</legend>
-
-      <input type="checkbox" id="pepperoni" name="toppings" value="pepperoni">
-      <label for="pepperoni">Pepperoni</label><br>
-
-      <input type="checkbox" id="sausage" name="toppings" value="sausage">
+      <input type="checkbox" id="sausage" name="topping" value="sausage">
       <label for="sausage">Sausage</label><br>
 
-      <input type="checkbox" id="mushrooms" name="toppings" value="mushrooms">
-      <label for="mushrooms">Mushrooms</label><br>
+      <input type="checkbox" id="mushroom" name="topping" value="mushroom">
+      <label for="mushroom">Mushroom</label>
 
-      <input type="checkbox" id="onions" name="toppings" value="onions">
-      <label for="onions">Onions</label><br>
+      <input type="checkbox" id="pineapple" name="topping" value="pineapple">
+      <label for="pineapple">Pineapple</label><br>
 
-      <input type="checkbox" id="olives" name="toppings" value="olives">
-      <label for="olives">Olives</label><br>
+      <input type="checkbox" id="peppers" name="topping" value="peppers">
+      <label for="peppers">Peppers</label>
 
-      <input type="checkbox" id="peppers" name="toppings" value="peppers">
-      <label for="peppers">Green Peppers</label>
+      <input type="checkbox" id="onions" name="topping" value="onions">
+      <label for="onions">Onions</label>
+    </section>
 
-    </fieldset>
+    <section>
+      <h2>Additional Instructions</h2>
+
+      <textarea name="instructions" rows="4" cols="30">Add instructions</textarea>
+    </section>
 
     <p>
-      <button type="submit">Submit Order</button>
+      <input type="submit" value="Submit">
     </p>
 
   </form>
 
   <section>
-    <h2>Favorite Video Games</h2>
+    <h2>List of My Favorite Games</h2>
 
     <table border="1">
       <thead>
         <tr>
-          <th rowspan="2">Genre</th>
-          <th colspan="3">Game Info</th>
-        </tr>
-        <tr>
+          <th>Developer</th>
           <th>Title</th>
-          <th>Platform</th>
           <th>Year</th>
         </tr>
       </thead>
 
       <tbody>
         <tr>
-          <td rowspan="2">Action</td>
-          <td>Elden Ring</td>
-          <td>PC</td>
-          <td>2022</td>
+          <td rowspan="3">Bungie</td>
+          <td>Halo</td>
+          <td>2001</td>
         </tr>
         <tr>
-          <td>God of War</td>
-          <td>PlayStation</td>
-          <td>2018</td>
+          <td>Halo 2</td>
+          <td>2004</td>
         </tr>
         <tr>
-          <td>Strategy</td>
-          <td>Civilization VI</td>
-          <td>PC</td>
-          <td>2016</td>
+          <td>Halo 3</td>
+          <td>2007</td>
         </tr>
         <tr>
-          <td>RPG</td>
-          <td>Skyrim</td>
-          <td>Multi</td>
+          <td>Mojang</td>
+          <td>Minecraft</td>
           <td>2011</td>
         </tr>
       </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="3">Count: 4</td>
+        </tr>
+      </tfoot>
     </table>
 
   </section>
