@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Akash Ganji - Resume</title>
+</head>
+<body>
+
+<header>
+  <h1>Akash Ganji</h1>
+
+  <p>
+    Email:
+    <a href="mailto:akashganji@knights.ucf.edu">akashganji@knights.ucf.edu</a>
+  </p>
+
+  <p>
+    LinkedIn:
+    <a href="https://www.linkedin.com/in/akashganji05" target="_blank">
+      linkedin.com/in/akashganji05
+    </a>
+  </p>
+</header>
+
+<main>
+
+  <section>
+    <h2>Professional Objective</h2>
+    <p>
+      Computer Science student seeking opportunities to gain experience in
+      software engineering, data science, and machine learning while
+      contributing to real-world projects.
+    </p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <p>
+      Bachelor of Science in Computer Science<br>
+      University of Central Florida
+    </p>
+    <p>
+      Burnett Honors College
+    </p>
+  </section>
+
+  <section>
+    <h2>Relevant Work Experience</h2>
+
+    <article>
+      <h3>Machine Learning / Data Science Researcher</h3>
+      <p>
+        University of Central Florida (NASA Sponsored)
+      </p>
+      <ul>
+        <li>Worked on data compression and machine learning research projects</li>
+        <li>Assisted with neural network development and optimization</li>
+      </ul>
+    </article>
+
+    <article>
+      <h3>Machine Learning Intern</h3>
+      <p>
+        Creating Real LLC
+      </p>
+      <ul>
+        <li>Helped develop and train machine learning models</li>
+        <li>Worked with data processing and automation tools</li>
+      </ul>
+    </article>
+
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <ul>
+      <li>Multi-agent machine learning system</li>
+      <li>Climate risk prediction application</li>
+      <li>Computer vision object recognition project</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <ul>
+      <li>Programming: Python, C/C++, Java</li>
+      <li>Web: HTML, CSS, JavaScript</li>
+      <li>Data & ML: Machine Learning fundamentals, data analysis</li>
+      <li>Tools: Git, Linux, basic cloud tools</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <p>© Akash Ganji</p>
+</footer>
+
+</body>
+</html>
