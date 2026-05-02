@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akash — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --ink: #1a1a18;
+      --muted: #6b6b65;
+      --accent: #c45c2a;
+      --line: #e0ddd8;
+      --card: #ffffff;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(249, 247, 244, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { display: none; padding: 100px 5vw 60px; min-height: 100vh; }
+    section.active { display: block; }
+
+    /* ── HOME ── */
+    #home {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 60px;
+      min-height: 100vh;
+    }
+    #home.active { display: flex; }
+
+    .home-inner {
+      max-width: 680px;
+      padding-top: 60px;
+    }
+
+    .home-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--accent);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .home-bio {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .home-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2.8rem;
+      max-width: 520px;
+    }
+
+    .detail-block {
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    .detail-block .label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-block p {
+      font-size: 0.88rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: #a84d22; border-color: #a84d22; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+    .btn-outline:hover { background: var(--ink); color: var(--bg); }
+
+    /* ── PAGE TITLE ── */
+    .page-header {
+      max-width: 760px;
+      margin: 0 auto 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page-header .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .page-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .page-header .intro-note {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.75;
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .content-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .prose p {
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.1rem;
+    }
+
+    .prose p strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ── WORK PAGE ── */
+    .work-grid {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2rem 2.2rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .work-card:hover {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      border-color: var(--accent);
+    }
+
+    .work-card-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .work-card h3 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .work-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .work-card .card-action {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      cursor: pointer;
+    }
+
+    /* ── INSTRUCTIONS PAGE ── */
+    .steps-list {
+      counter-reset: step;
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .steps-list li {
+      counter-increment: step;
+      display: flex;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .steps-list li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .steps-list li p {
+      font-size: 0.94rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .steps-list li p strong { color: var(--ink); font-weight: 500; }
+
+    /* ── COVER LETTER ── */
+    .letter-wrap {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2.5rem 3rem;
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .letter-wrap .letter-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+    }
+
+    .letter-wrap .letter-meta p { margin-bottom: 0.2rem; }
+
+    .letter-wrap p {
+      font-size: 0.94rem;
+      color: var(--ink);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .letter-wrap .sign-off {
+      margin-top: 1.8rem;
+    }
+
+    /* ── RESUME SECTION ── */
+    .resume-block {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+    }
+
+    .resume-section-title {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .resume-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .resume-item .ri-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .resume-item .ri-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .resume-item .ri-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .resume-item ul {
+      list-style: none;
+      margin-top: 0.4rem;
+      grid-column: 1 / -1;
+    }
+
+    .resume-item ul li {
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .resume-item ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    /* ── PROPOSAL ── */
+    .proposal-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .proposal-card .pc-header {
+      background: var(--ink);
+      padding: 2rem 2.5rem;
+    }
+
+    .proposal-card .pc-header h3 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .proposal-card .pc-header p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .proposal-card .pc-body {
+      padding: 2.2rem 2.5rem;
+    }
+
+    .proposal-card .pc-body p {
+      font-size: 0.94rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .proposal-card .pc-body p strong { color: var(--ink); font-weight: 500; }
+
+    .proposal-section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 1.8rem 0 0.7rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 5vw;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── FADE IN ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    section.active > * {
+      animation: fadeUp 0.45s ease both;
+    }
+
+    .home-tag  { animation-delay: 0.05s; }
+    h1         { animation-delay: 0.12s; }
+    .home-bio  { animation-delay: 0.19s; }
+    .home-details { animation-delay: 0.26s; }
+    .cta-row   { animation-delay: 0.33s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .home-details { grid-template-columns: 1fr; }
+      .letter-wrap  { padding: 1.8rem 1.4rem; }
+      .proposal-card .pc-header,
+      .proposal-card .pc-body { padding: 1.5rem 1.4rem; }
+      .resume-item { grid-template-columns: 1fr; }
+      .resume-item .ri-date { text-align: left; }
+      nav { padding: 0 4vw; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#" onclick="show('home')">Akash G.</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="show('home')" id="nav-home" class="active">Home</a></li>
+      <li><a href="#" onclick="show('instructions')" id="nav-instructions">Instructions</a></li>
+      <li><a href="#" onclick="show('coverletter')" id="nav-coverletter">Cover Letter</a></li>
+      <li><a href="#" onclick="show('proposal')" id="nav-proposal">Proposal</a></li>
+      <li><a href="#" onclick="show('resume')" id="nav-resume">Résumé</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HOME ── -->
+  <section id="home" class="active">
+    <div class="home-inner">
+      <span class="home-tag">Digital Portfolio</span>
+      <h1>Hi, I'm<br><em>Akash Ganji.</em></h1>
+      <p class="home-bio">
+        I'm a Computer Science student at UCF studying machine learning and computer vision. Most of the work I find interesting lives somewhere between technically hard and actually useful, so I've spent a lot of time on distributed systems, privacy-preserving ML, and projects that hold up outside of a notebook.
+      </p>
+      <div class="home-details">
+        <div class="detail-block">
+          <div class="label">Education</div>
+          <p>B.S. Computer Science<br>Burnett Honors College, UCF<br>Expected May 2027</p>
+        </div>
+        <div class="detail-block">
+          <div class="label">Experience</div>
+          <p>ML Intern — Creating Real LLC<br>Undergraduate Researcher — UCF / NASA</p>
+        </div>
+        <div class="detail-block">
+          <div class="label">Coursework</div>
+          <p>Machine Learning · Computer Vision<br>Discrete Structures II · Systems Programming</p>
+        </div>
+        <div class="detail-block">
+          <div class="label">Skills</div>
+          <p>Python · C · TensorFlow · AWS SageMaker<br>PyTorch · React · SQL · LaTeX</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#" onclick="show('coverletter')">View Cover Letter</a>
+        <a class="btn btn-outline" href="#" onclick="show('proposal')">See My Proposal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INSTRUCTIONS ── -->
+  <section id="instructions">
+    <div class="page-header">
+      
+      <h2>How to Deep-Clean an Air Fryer</h2>
+      <p class="intro-note">
+        This assignment asked us to write a set of step-by-step instructions for a process our audience might not know how to do safely. I wrote a guide on deep-cleaning an air fryer since it's something a lot of people skip until something goes wrong, and most of the guides online either skip important steps or don't explain why each one matters.
+      </p>
+    </div>
+    <div class="content-wrap">
+
+      <!-- Tools -->
+      <div class="prose" style="margin-bottom:1.5rem;">
+        <p><strong>What you'll need:</strong> non-abrasive sponge, soft-bristle toothbrush, dish soap, baking soda, microfiber cloth, wooden skewer.</p>
+        <p style="font-size:0.85rem;">Avoid steel wool or rough scrubbers as they will scratch and damage the non-stick coating.</p>
+      </div>
+
+      <!-- Safety -->
+      <div style="background:#fff8f5;border-left:3px solid #c45c2a;padding:0.9rem 1.2rem;margin-bottom:2rem;border-radius:2px;">
+        <p style="font-size:0.85rem;color:var(--ink);margin:0 0 0.4rem;font-weight:500;">DANGER: Never submerge the main unit in water. The internal motor and fan are not water resistant.</p>
+        <p style="font-size:0.85rem;color:var(--ink);margin:0;">WARNING: Make sure the air fryer has been unplugged and unused for at least 30 minutes before starting.</p>
+      </div>
+
+      <!-- Phase 1 -->
+      <h3 style="font-family:var(--serif);font-size:1.2rem;font-weight:400;margin:0 0 0.8rem;">Phase 1: Preparation</h3>
+      <ul class="steps-list" style="margin-bottom:2rem;">
+        <li><p><strong>Unplug the appliance</strong> and move the cord away from the sink area.</p></li>
+        <li><p><strong>Remove the basket and tray</strong> and set them in the sink.</p></li>
+        <li><p><strong>Wipe the exterior</strong> with a damp microfiber cloth and a small drop of dish soap. Stick to the outer shell only.</p></li>
+        <li><p><strong>Clean the screen</strong> with a dry or barely damp cloth. Don't spray anything directly onto the interface.</p></li>
+        <li><p><strong>Clear the vent slats</strong> at the back using the wooden skewer and toothbrush to dislodge any trapped dust or grease.</p></li>
+      </ul>
+
+      <!-- Phase 2 -->
+      <h3 style="font-family:var(--serif);font-size:1.2rem;font-weight:400;margin:0 0 0.8rem;">Phase 2: Cleaning the Basket</h3>
+      <ul class="steps-list" style="margin-bottom:2rem;">
+        <li><p><strong>Soak the basket</strong> in hot water with a small amount of grease-cutting dish soap for 10 minutes.</p></li>
+        <li><p><strong>Make a baking soda paste</strong> by mixing baking soda and water at a 3:1 ratio.</p></li>
+        <li><p><strong>Apply the paste</strong> to any burnt or dried-on grease spots and let it sit for 10 minutes.</p></li>
+        <li><p><strong>Scrub gently</strong> with a non-abrasive sponge in circular motions, then rinse with warm water. Repeat if needed.</p></li>
+      </ul>
+
+      <!-- Phase 3 -->
+      <h3 style="font-family:var(--serif);font-size:1.2rem;font-weight:400;margin:0 0 0.8rem;">Phase 3: The Deep Clean</h3>
+      <ul class="steps-list" style="margin-bottom:2rem;">
+        <li><p><strong>Flip the main unit upside down</strong> so the interior ceiling faces up.</p></li>
+        <li><p><strong>Locate the heating coil,</strong> the metal ring sitting just behind the fan.</p></li>
+        <li><p><strong>Scrub the coil</strong> with a toothbrush dipped in soapy water using gentle strokes.</p></li>
+        <li><p><strong>Wipe the interior ceiling</strong> with a slightly damp sponge. Grease buildup here is a fire risk so be thorough.</p></li>
+        <li><p><strong>Dry completely</strong> with a clean paper towel before reassembling. No moisture should remain on the heating element.</p></li>
+      </ul>
+
+      <!-- Phase 4 -->
+      <h3 style="font-family:var(--serif);font-size:1.2rem;font-weight:400;margin:0 0 0.8rem;">Phase 4: Reassembly and Testing</h3>
+      <ul class="steps-list" style="margin-bottom:2rem;">
+        <li><p><strong>Air dry all parts</strong> for at least 30 minutes. Trapped moisture can cause electrical shorts.</p></li>
+        <li><p><strong>Reinsert the basket</strong> and plug the unit back in.</p></li>
+        <li><p><strong>Run a test cycle</strong> at 400°F for 1 to 2 minutes with no food inside. This burns off any leftover soap residue.</p></li>
+      </ul>
+
+      <!-- Troubleshooting -->
+      <h3 style="font-family:var(--serif);font-size:1.2rem;font-weight:400;margin:0 0 0.8rem;">Troubleshooting</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;margin-bottom:1rem;">
+        <thead>
+          <tr style="background:var(--ink);color:#fff;">
+            <th style="padding:0.7rem 1rem;text-align:left;font-weight:500;">Problem</th>
+            <th style="padding:0.7rem 1rem;text-align:left;font-weight:500;">Cause</th>
+            <th style="padding:0.7rem 1rem;text-align:left;font-weight:500;">Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);">
+            <td style="padding:0.7rem 1rem;color:var(--ink);">White smoke during use</td>
+            <td style="padding:0.7rem 1rem;color:var(--muted);">Excess grease on the coil</td>
+            <td style="padding:0.7rem 1rem;color:var(--muted);">Repeat Phase 3</td>
+          </tr>
+          <tr>
+            <td style="padding:0.7rem 1rem;color:var(--ink);">Lingering food smell</td>
+            <td style="padding:0.7rem 1rem;color:var(--muted);">Trapped crumbs in the vents</td>
+            <td style="padding:0.7rem 1rem;color:var(--muted);">Re-soak basket with water, lemon juice, and dish soap</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <!-- ── COVER LETTER ── -->
+  <section id="coverletter">
+    <div class="page-header">
+      
+      <h2>Cover Letter &amp; Résumé</h2>
+      <p class="intro-note">
+        This assignment had us write a tailored cover letter and update our résumé for a real job posting. I applied to a Python Developer Internship at Precisely Software since the role matched up pretty well with the ML and data pipeline work I had done over the past two years.
+      </p>
+    </div>
+
+    <div class="letter-wrap">
+      <div class="letter-meta">
+        <p>Akash Ganji · Orlando, FL · ak732085@ucf.edu · 954-706-7885</p>
+        <p>March 29, 2026</p>
+        <p style="margin-top:0.6rem;">Precisely Software Inc.<br>HR Department<br>1700 District Ave, Suite 300<br>Burlington, MA 01803</p>
+      </div>
+
+      <p>To Whom It May Concern,</p>
+
+      <p>
+        I am writing to apply for the Python Developer Intern position at Precisely Software. Through my machine learning work, experience with cloud technologies, and collaborative software development at UCF's Burnett Honors College, I've built a skillset that maps directly onto what this role requires.
+      </p>
+
+      <p>
+        At Creating Real LLC, I worked as a machine learning intern where I built an AI recommendation system using TensorFlow on AWS SageMaker, achieving 96% match accuracy and 25% faster response times. I also developed automated data workflows that processed thousands of daily news headlines using AWS Lambda and DynamoDB. That project pushed me to write clean, production-ready Python code under real constraints, which is something I've carried into every project since.
+      </p>
+
+      <p>
+        As a Machine Learning and Data Science Researcher at UCF under NASA sponsorship, I built distributed data pipelines in C++ that integrated with AWS S3 and EC2, cutting dataset size by 95% and improving training throughput by 4x. I also developed an autoencoder that hit a 0.8% reconstruction error. That kind of rigorous, fast-paced engineering environment is one I'm comfortable in and honestly enjoy working in.
+      </p>
+
+      <p>
+        I'd welcome the chance to talk through how my background fits the Python Developer Intern role at Precisely. Happy to share any additional details that would be helpful.
+      </p>
+
+      <div class="sign-off">
+        <p>Thank you for your time,</p>
+        <p style="margin-top: 0.6rem; font-family: var(--serif); font-size: 1.1rem; color: var(--ink);">Akash Ganji</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROPOSAL ── -->
+  <section id="proposal">
+    <div class="page-header">
+      
+      <h2>Research Proposal</h2>
+      <p class="intro-note">
+        This assignment asked us to write a formal research grant proposal following UCF's Office of Undergraduate Research format. I wrote mine on using federated learning to predict urban heat islands without centralizing sensitive sensor data. I got interested in the topic after noticing how much useful data cities collect but rarely share across municipal lines.
+      </p>
+    </div>
+
+    <div class="proposal-card">
+      <div class="pc-header">
+        <h3>Federated Learning for Privacy-Preserving Urban Heat Island Prediction</h3>
+        <p>Undergraduate Research Proposal · Faculty Mentor: Dr. Liqiang Wang · UCF Department of Computer Science</p>
+      </div>
+      <div class="pc-body">
+        <div class="proposal-section-label">Background &amp; Motivation</div>
+        <p>
+          Urban heat islands are areas in cities that stay significantly warmer than surrounding rural zones, and they're a growing public health concern. Cities collect temperature, traffic, and land-use data at scale, but sharing that data across municipal boundaries raises real privacy and sovereignty questions. Most existing predictive models either rely on centralized datasets that aren't realistically available, or sacrifice accuracy by working with coarse aggregates.
+        </p>
+        <p>
+          Federated learning offers a way out of this tradeoff. Rather than pooling raw data in one place, each city trains a local model and shares only the model updates, keeping the underlying data local while still contributing to a shared global model. This project proposes to test whether a federated approach can match centralized model performance on urban heat island prediction tasks using publicly available satellite and sensor data from multiple U.S. cities.
+        </p>
+
+        <div class="proposal-section-label">Research Questions</div>
+        <p>
+          <strong>Primary:</strong> Can a federated learning framework achieve comparable predictive accuracy to a centralized model for urban heat island mapping, without requiring direct data sharing between participating nodes?
+        </p>
+        <p>
+          <strong>Secondary:</strong> How does model performance degrade as the number of federated nodes increases, and what aggregation strategies best preserve accuracy under realistic non-IID data distributions?
+        </p>
+
+        <div class="proposal-section-label">Proposed Methodology</div>
+        <p>
+          The study will use publicly available MODIS/Landsat satellite imagery and EPA air quality sensor data across 10 to 15 U.S. cities. A baseline CNN regression model will first be trained centrally as a performance benchmark. A federated version of the same architecture will then be trained using the FedAvg aggregation algorithm, with each city's dataset treated as a separate client node. Both models will be evaluated on a held-out test set using RMSE and spatial prediction maps.
+        </p>
+        <p>
+          All experiments will be implemented in Python using PyTorch and the Flower federated learning framework. Simulated federation will allow controlled testing of different numbers of clients, data heterogeneity levels, and communication round configurations.
+        </p>
+
+        <div class="proposal-section-label">Expected Outcomes</div>
+        <p>
+          I expect the federated model to perform within 5 to 10% of the centralized baseline while maintaining full data locality. If successful, this would provide practical evidence that federated methods are viable for urban sensing tasks, with real implications for city planners, public health researchers, and anyone working on climate adaptation infrastructure. The work would also produce a reusable open-source pipeline for federated geospatial modeling that other researchers could build on.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESUME ── -->
+  <section id="resume">
+    <div class="page-header">
+      <span class="tag">Résumé</span>
+      <h2>Akash Ganji</h2>
+      <p class="intro-note" style="font-size:0.9rem;">
+        954-706-7885 &nbsp;·&nbsp; akashganji558@gmail.com &nbsp;·&nbsp;
+        <a href="https://linkedin.com/in/akashganji05" target="_blank" style="color:var(--accent);text-decoration:none;">linkedin.com/in/akashganji05</a> &nbsp;·&nbsp;
+        <a href="https://github.com/AkashGanji2005" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/AkashGanji2005</a>
+      </p>
+    </div>
+
+    <div class="content-wrap">
+
+      <!-- Education -->
+      <div class="resume-block" style="max-width:100%;margin-bottom:2rem;">
+        <div class="resume-section-title">Education</div>
+        <div class="resume-item">
+          <div>
+            <div class="ri-title">University of Central Florida — Orlando, FL</div>
+            <div class="ri-sub">Bachelor of Science in Computer Science · Burnett Honors College</div>
+          </div>
+          <div class="ri-date">May 2027</div>
+          <ul>
+            <li>Relevant Coursework: Data Structures and Algorithms, Systems Software, Computer Architecture, Matrix and Linear Algebra, Discrete Math, Algorithms for Machine Learning, Processes for Object-Oriented Software</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="resume-block" style="max-width:100%;margin-bottom:2rem;">
+        <div class="resume-section-title">Experience</div>
+
+        <div class="resume-item">
+          <div>
+            <div class="ri-title">Machine Learning / Data Science Researcher</div>
+            <div class="ri-sub">University of Central Florida (NASA Sponsorship) · Orlando, FL</div>
+          </div>
+          <div class="ri-date">Apr. 2025 – Aug. 2025</div>
+          <ul>
+            <li>Developed a data compression algorithm in C++ using object-oriented design patterns, reducing dataset size by 95% and enabling 4x faster surrogate-model training</li>
+            <li>Refactored and optimized PyTorch RNN pipelines, implementing unit tests and improving temporal analysis speed by 3x</li>
+            <li>Collaborated with senior researchers to produce maintainable, production-ready code with Git-based version control and technical documentation</li>
+          </ul>
+        </div>
+
+        <div class="resume-item" style="margin-top:1.2rem;">
+          <div>
+            <div class="ri-title">Machine Learning Intern</div>
+            <div class="ri-sub">Creating Real LLC · Orlando, FL</div>
+          </div>
+          <div class="ri-date">May 2024 – Aug. 2024</div>
+          <ul>
+            <li>Integrated trained ML models into a SaaS backend via RESTful APIs, achieving 96% match accuracy for a social-media application</li>
+            <li>Automated ingestion and classification of 10,000+ JSON-formatted headlines, streamlining ETL workflows and cutting manual effort by 90%</li>
+            <li>Partnered in an Agile team environment, implementing tests, debugging production issues, and resolving 10+ system bugs to strengthen platform reliability</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="resume-block" style="max-width:100%;margin-bottom:2rem;">
+        <div class="resume-section-title">Projects</div>
+
+        <div class="resume-item">
+          <div>
+            <div class="ri-title">Multi AI Agent Trading System</div>
+            <div class="ri-sub" style="font-style:italic;font-size:0.8rem;">PyTorch · PettingZoo · Apache Spark · MongoDB · Streamlit · Docker · Redis · Kafka</div>
+          </div>
+          <ul>
+            <li>Built a distributed trading platform with modular OOP design, supporting 25+ concurrent agents across 500+ steps</li>
+            <li>Engineered real-time REST API integration with Redis and MongoDB, processing 1M+ transactions and detecting anomalies at 95% accuracy</li>
+            <li>Deployed a Dockerized dashboard in Streamlit for real-time monitoring, cutting analysis time by 80%</li>
+          </ul>
+        </div>
+
+        <div class="resume-item" style="margin-top:1.2rem;">
+          <div>
+            <div class="ri-title">ClimaRisk</div>
+            <div class="ri-sub" style="font-style:italic;font-size:0.8rem;">Python · LightGBM · FastAPI · PostgreSQL · React · Docker · AWS S3</div>
+          </div>
+          <ul>
+            <li>Developed a SaaS-style platform with FastAPI REST endpoints, PostgreSQL spatial databases, and a React-based dashboard</li>
+            <li>Built ETL workflows and applied ML models, enabling real-time risk scoring on 10,000+ scenarios with 94% predictive accuracy</li>
+            <li>Designed scalable cloud architecture with Docker and AWS S3, achieving under 200ms API response times</li>
+          </ul>
+        </div>
+
+        <div class="resume-item" style="margin-top:1.2rem;">
+          <div>
+            <div class="ri-title">Object Shopper</div>
+            <div class="ri-sub" style="font-style:italic;font-size:0.8rem;">Python · BeautifulSoup · Pandas · OpenCV · Flask</div>
+          </div>
+          <ul>
+            <li>Engineered a backend with Flask APIs to identify objects via OpenCV and return live product deals</li>
+            <li>Implemented web scraping pipelines (BeautifulSoup, Pandas) and API integrations to aggregate product data</li>
+            <li>Optimized recognition accuracy from 90% to 98% by fine-tuning on 15,000+ labeled images</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="resume-block" style="max-width:100%;margin-bottom:2rem;">
+        <div class="resume-section-title">Technical Skills</div>
+        <div class="resume-item">
+          <ul>
+            <li><strong style="color:var(--ink);font-weight:500;">Languages:</strong> Java, Python, C/C++, JavaScript/TypeScript, SQL, HTML/CSS</li>
+            <li><strong style="color:var(--ink);font-weight:500;">Frameworks/Libraries:</strong> React, Node.js, Flask, FastAPI, .NET, PyTorch, TensorFlow</li>
+            <li><strong style="color:var(--ink);font-weight:500;">Databases:</strong> PostgreSQL, MySQL, MongoDB, Redis</li>
+            <li><strong style="color:var(--ink);font-weight:500;">Developer Tools:</strong> Git/GitHub, Docker, Apache Spark, Kafka, AWS (S3, EC2)</li>
+            <li><strong style="color:var(--ink);font-weight:500;">Software Practices:</strong> Object-Oriented Design, RESTful APIs, Agile, Test-Driven Development, ORM (SQLAlchemy, Hibernate)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>Akash Ganji · Computer Science, UCF · Built for ENC 3241</p>
+  </footer>
+
+  <script>
+    function show(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.getElementById('nav-' + id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return false;
+    }
+
+    document.querySelectorAll('.nav-links a, .btn, .card-action').forEach(el => {
+      el.addEventListener('click', e => e.preventDefault());
+    });
+  </script>
+</body>
+</html>
